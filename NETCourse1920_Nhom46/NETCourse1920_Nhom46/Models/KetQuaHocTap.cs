@@ -18,7 +18,11 @@ namespace NETCourse1920_Nhom46.Models
         [ForeignKey("MaSV")]
         public SinhVien SinhVien { get; set; }
 
-        public ICollection<LopHocPhan> LopHocPhans { get; set; }
-     
+        public int MaLHP { get; set; }
+        [ForeignKey("MaLHP")]
+        public LopHocPhan LopHocPhan { get; set; }
+
+
+
     }
 }

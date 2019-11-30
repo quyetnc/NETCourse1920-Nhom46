@@ -10,8 +10,8 @@ using NETCourse1920_Nhom46.Models;
 namespace NETCourse1920_Nhom46.Migrations
 {
     [DbContext(typeof(QuanLyDbContext))]
-    [Migration("20191130031946_createQ")]
-    partial class createQ
+    [Migration("20191130034157_createdb")]
+    partial class createdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,9 +27,13 @@ namespace NETCourse1920_Nhom46.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("MaLHP");
+
                     b.Property<int>("MaSV");
 
                     b.HasKey("MaKQHT");
+
+                    b.HasIndex("MaLHP");
 
                     b.HasIndex("MaSV");
 
@@ -61,15 +65,11 @@ namespace NETCourse1920_Nhom46.Migrations
 
                     b.Property<string>("HocKy");
 
-                    b.Property<int>("MaKQHT");
-
                     b.Property<int>("MaMon");
 
                     b.Property<string>("NamHoc");
 
                     b.HasKey("MaLHP");
-
-                    b.HasIndex("MaKQHT");
 
                     b.HasIndex("MaMon");
 
@@ -114,6 +114,11 @@ namespace NETCourse1920_Nhom46.Migrations
 
             modelBuilder.Entity("NETCourse1920_Nhom46.Models.KetQuaHocTap", b =>
                 {
+                    b.HasOne("NETCourse1920_Nhom46.Models.LopHocPhan", "LopHocPhan")
+                        .WithMany("KetQuaHocTaps")
+                        .HasForeignKey("MaLHP")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("NETCourse1920_Nhom46.Models.SinhVien", "SinhVien")
                         .WithMany("KetQuaHocTaps")
                         .HasForeignKey("MaSV")
@@ -122,11 +127,6 @@ namespace NETCourse1920_Nhom46.Migrations
 
             modelBuilder.Entity("NETCourse1920_Nhom46.Models.LopHocPhan", b =>
                 {
-                    b.HasOne("NETCourse1920_Nhom46.Models.KetQuaHocTap", "KetQuaHocTap")
-                        .WithMany("LopHocPhans")
-                        .HasForeignKey("MaKQHT")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("NETCourse1920_Nhom46.Models.MonHoc", "MonHoc")
                         .WithMany()
                         .HasForeignKey("MaMon")
