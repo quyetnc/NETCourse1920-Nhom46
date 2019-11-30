@@ -14,7 +14,10 @@ namespace NETCourse1920_Nhom46.Controllers
         {
             return View();
         }
-
+	public IActionResult PointView()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
