@@ -15,9 +15,5 @@ namespace NETCourse1920_Nhom46.Models
         public string TenMon { get; set; }
         [Display(Name = "Số Tín Chỉ")]
         public int SoTinChi { get; set; }
-
-        public ICollection<LopHocPhan> LopHocPhans { get; set; }
-
-        public ICollection<KetQuaHocTap> KetQuaHocTaps { get; set; }
     }
 }

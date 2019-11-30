@@ -20,10 +20,6 @@ namespace NETCourse1920_Nhom46.Models
         public string DienThoai { get; set; }
 
 
-        public int MaLHP { get; set; }
-        [ForeignKey("MaLHP")]
-        public LopHocPhan LopHocPhan { get; set; }
-
         public int MaKhoa { get; set; }
         [ForeignKey("MaKhoa")]
         public Khoa Khoa { get; set; }

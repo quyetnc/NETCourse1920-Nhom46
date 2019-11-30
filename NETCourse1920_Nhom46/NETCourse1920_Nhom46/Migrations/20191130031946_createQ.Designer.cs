@@ -10,8 +10,8 @@ using NETCourse1920_Nhom46.Models;
 namespace NETCourse1920_Nhom46.Migrations
 {
     [DbContext(typeof(QuanLyDbContext))]
-    [Migration("20191130022623_createDB")]
-    partial class createDB
+    [Migration("20191130031946_createQ")]
+    partial class createQ
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,13 +27,9 @@ namespace NETCourse1920_Nhom46.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MaLHP");
-
                     b.Property<int>("MaSV");
 
                     b.HasKey("MaKQHT");
-
-                    b.HasIndex("MaLHP");
 
                     b.HasIndex("MaSV");
 
@@ -65,11 +61,15 @@ namespace NETCourse1920_Nhom46.Migrations
 
                     b.Property<string>("HocKy");
 
+                    b.Property<int>("MaKQHT");
+
                     b.Property<int>("MaMon");
 
                     b.Property<string>("NamHoc");
 
                     b.HasKey("MaLHP");
+
+                    b.HasIndex("MaKQHT");
 
                     b.HasIndex("MaMon");
 
@@ -103,36 +103,32 @@ namespace NETCourse1920_Nhom46.Migrations
 
                     b.Property<int>("MaKhoa");
 
-                    b.Property<int>("MaLHP");
-
                     b.Property<DateTime>("NgaySinh");
 
                     b.HasKey("MaSV");
 
                     b.HasIndex("MaKhoa");
 
-                    b.HasIndex("MaLHP");
-
                     b.ToTable("SinhViens");
                 });
 
             modelBuilder.Entity("NETCourse1920_Nhom46.Models.KetQuaHocTap", b =>
                 {
-                    b.HasOne("NETCourse1920_Nhom46.Models.LopHocPhan", "LopHocPhan")
-                        .WithMany()
-                        .HasForeignKey("MaLHP")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("NETCourse1920_Nhom46.Models.SinhVien", "SinhVien")
-                        .WithMany()
+                        .WithMany("KetQuaHocTaps")
                         .HasForeignKey("MaSV")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("NETCourse1920_Nhom46.Models.LopHocPhan", b =>
                 {
-                    b.HasOne("NETCourse1920_Nhom46.Models.MonHoc", "MonHoc")
+                    b.HasOne("NETCourse1920_Nhom46.Models.KetQuaHocTap", "KetQuaHocTap")
                         .WithMany("LopHocPhans")
+                        .HasForeignKey("MaKQHT")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NETCourse1920_Nhom46.Models.MonHoc", "MonHoc")
+                        .WithMany()
                         .HasForeignKey("MaMon")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -142,11 +138,6 @@ namespace NETCourse1920_Nhom46.Migrations
                     b.HasOne("NETCourse1920_Nhom46.Models.Khoa", "Khoa")
                         .WithMany("SinhViens")
                         .HasForeignKey("MaKhoa")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("NETCourse1920_Nhom46.Models.LopHocPhan", "LopHocPhan")
-                        .WithMany("SinhViens")
-                        .HasForeignKey("MaLHP")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

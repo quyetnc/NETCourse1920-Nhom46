@@ -26,9 +26,9 @@ namespace NETCourse1920_Nhom46.Models
         [Display(Name = "Điểm Cuối Kỳ")]
         public double DiemCuoiKy { get; set; }
 
-        public ICollection<SinhVien> SinhViens { get; set; }
-
-        public ICollection<KetQuaHocTap> KetQuaHocTaps { get; set; }
+        public int MaKQHT { get; set; }
+        [ForeignKey("MaKQHT")]
+        public KetQuaHocTap KetQuaHocTap { get; set; }
 
     }
 }
